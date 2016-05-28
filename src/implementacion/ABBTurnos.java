@@ -77,7 +77,7 @@ public class ABBTurnos implements ABBTDATurnos {
 				return mayor(a.hijoDerecho());
 		}
 		
-		private NodoABB menor(ABBTDATurnos a) //El mayor es el valor del hijo derecho que no tiene hijo derecho
+		private NodoABB menor(ABBTDATurnos a) //El menor es el valor del hijo derecho que no tiene hijo derecho
 		{
 			if(a.hijoIzquierdo().arbolVacio())
 				return raiz;
