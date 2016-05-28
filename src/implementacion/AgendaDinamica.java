@@ -32,14 +32,14 @@ public class AgendaDinamica implements IAgenda
 			nodoclave = new NodoClave() ;
 			nodoclave.clave = medico;
 			nodoclave.valores = null;
-			
-			nodoclave.siguiente = primero;
+		    nodoclave.siguiente = primero;
 			primero = nodoclave;
 		}
 	
 		NodoValor aux = nodoclave.valores;
 		
-		while ( aux != null && aux.fecha!= fecha) {
+		while ( aux != null && aux.fecha != fecha) 
+		{
 			aux = aux.sigFecha;
 		}
 		
@@ -50,15 +50,38 @@ public class AgendaDinamica implements IAgenda
 			nodovalor.sigFecha 	= nodoclave.valores;
 			//agregar el arbol a valor
 			nodoclave.valores 	= nodovalor ;
-			NodoABB arbol = new ABBTurnos();
+			ABBTDATurnos arbol = new ABBTurnos();
 			nodovalor.turnos = arbol;
+			arbol.agregar(paciente, turno);
+		}
+		else 
+		{
+			aux.turnos.agregar(paciente, turno);
 		}
 		
-		 
-		
-		
-		
-		
-		
+	}
+
+
+	public void eliminar(String medico)
+	{
+			if(primero!= null) 
+			{
+				if(primero.clave == medico) 
+				{
+					primero = primero.siguiente;
+				}
+				else 
+				{
+					NodoClave aux = primero;
+					while (aux.siguiente != null && aux.siguiente.clave != medico) 
+					{
+						aux = aux.siguiente;
+					}
+					if(aux.siguiente != null ) 
+					{
+						aux.siguiente= aux.siguiente.siguiente;
+					}
+				}
+			}
 	}
 }
