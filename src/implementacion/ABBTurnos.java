@@ -52,7 +52,7 @@ public class ABBTurnos implements ABBTDATurnos {
 					raiz = this.mayor(raiz.hijoI);
 					raiz.hijoI.eliminar(raiz.paciente);
 				}
-				else if(raiz.paciente == paciente && raiz.hijoD.arbolVacio())
+				else if(raiz.paciente == paciente && !raiz.hijoD.arbolVacio())
 				{
 					raiz = this.menor( raiz.hijoD);
 					raiz.hijoD.eliminar(raiz.paciente);

@@ -153,12 +153,9 @@ public class AgendaDinamica implements IAgenda
 			aux = aux.sigFecha;
 		}
 		
-		for (int i=0 ; i < 40; i++ )
-		{
-			aux.turnos.eliminar(paciente);
-		}
-	}
-
+		aux.turnos.eliminar(paciente);
+    }
+	
 	private void EliminarValorEnNodo( NodoClave nodo , int valor) 
 	{
 		i f ( nodo . valores!= nul l ) {
