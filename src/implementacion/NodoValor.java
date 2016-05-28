@@ -1,10 +1,10 @@
 package implementacion;
 
 import tda.ABBTDATurnos;
-
+//SACAR el public de los atributos del nodo
 public class NodoValor {
 	
-	String fecha;
-	ABBTDATurnos turnos;
-	NodoValor sigFecha;
+	public String fecha;
+	public ABBTDATurnos turnos;
+	public NodoValor sigFecha;
 }

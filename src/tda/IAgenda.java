@@ -1,5 +1,7 @@
 package tda;
 
+import implementacion.NodoClave;
+
 public interface IAgenda {
 
 	/**
@@ -115,5 +117,7 @@ public interface IAgenda {
 	 * 			  
 	 * */
 	public String[][] obtenerTurnosMedicoEnFecha(String medico, String fecha);
+	
+	public NodoClave mostrarMedico(String medico);
 
 }

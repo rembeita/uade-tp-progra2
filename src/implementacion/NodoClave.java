@@ -1,8 +1,9 @@
 package implementacion;
 
+//SACAR el public de los atributos del nodo
 public class NodoClave {
 	
-	String clave;
-	NodoValor valores;
-	NodoClave siguiente;
+	public String clave;
+	public NodoValor valores;
+	public NodoClave siguiente;
 }

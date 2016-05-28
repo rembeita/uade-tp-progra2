@@ -84,4 +84,98 @@ public class AgendaDinamica implements IAgenda
 				}
 			}
 	}
+	
+	public NodoClave mostrarMedico(String medico)
+	{
+		NodoClave nodoclave = buscarClave(medico);
+
+		return nodoclave;
+	}
+	
+	/** <B>inicializada.</B><BR><BR>
+	 * 
+	 * Elimina una fecha determinada a un medico determinado. Si no existe no hace nada.
+	 * @param medico   : Cadena de caracteres con el nombre del médico
+	 * @param fecha    : Cadena de caracteres con la fecha del turno. El formato es <B>YYYYMMDD<B>
+	 * @return void
+	 * 
+	 * */
+	public void eliminarFecha(String medico, String fecha)
+	{
+			if ( primero != null ) 
+			{
+				if ( primero.clave == medico) 
+				{					
+					EliminarValorEnNodo(primero, fecha);
+					if( primero.valores == null ) 
+					{
+						primero = primero.siguiente;
+					}
+				}
+				else 
+				{
+					NodoClave aux = primero;
+					while (aux.siguiente != null && aux.siguiente.clave != medico)
+					{
+						aux = aux.siguiente;
+					}
+					if( aux.siguiente != null ) 
+					{
+						EliminarValorEnNodo(aux. siguiente , fecha);
+						if (aux.siguiente.valores == null ) 
+						{
+							aux.siguiente = aux.siguiente.siguiente;
+						}
+					}
+				}
+			}
+		}
+		
+	
+	/** <B>inicializada.</B><BR><BR>
+	 * 
+	 * Elimina el o los turnos de un paciente determinado en una fecha determinada a un medico determinado. Si 
+	 * el médico o la fecha no existe no hace nada
+	 * @param medico   : Cadena de caracteres con el nombre del médico
+	 * @param fecha    : Cadena de caracteres con la fecha del turno. El formato es <B>YYYYMMDD</B>
+	 * @param paciente : Cadena de caracteres con el nombre del paciente
+	 * @return void
+	 * 
+	 * */
+	public void eliminarTurno(String medico, String fecha, String paciente)
+	{
+		NodoClave nodoclave = buscarClave(medico);
+		
+		NodoValor aux = nodoclave.valores;
+		
+		while ( aux != null && aux.fecha != fecha) 
+		{
+			aux = aux.sigFecha;
+		}
+		
+		for (int i=0 ; i < 40; i++ )
+		{
+			aux.turnos.eliminar(paciente);
+		}
+	}
+
+	private void EliminarValorEnNodo( NodoClave nodo , int valor) 
+	{
+		i f ( nodo . valores!= nul l ) {
+			i f (nodo . valores. valor == valor) {
+				nodo . valores = nodo . valores. sigValor;
+			}
+			e l s e {
+				NodoValor aux = nodo . valores;
+				whi le (aux . sigValor != nul l && aux. sigValor.valor
+						!= valor){
+					aux = aux. sigValor;
+				}
+				i f ( aux. sigValor!= nul l ) {
+					aux. sigValor= aux. sigValor. sigValor;
+				}
+			}
+		}
+	}
+
 }

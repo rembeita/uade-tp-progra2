@@ -5,9 +5,11 @@ package implementacion;
  * */
 import tda.ABBTDATurnos;
 
+
+//SACAR el public de los atributos del nodo
 public class NodoABB {
-	String paciente;
-	String turno;
-	ABBTDATurnos hijoI;
-	ABBTDATurnos hijoD;
+	public String paciente;
+	public String turno;
+	public ABBTDATurnos hijoI;
+	public ABBTDATurnos hijoD;
 }
