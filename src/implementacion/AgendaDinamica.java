@@ -50,6 +50,15 @@ public class AgendaDinamica implements IAgenda
 			nodovalor.sigFecha 	= nodoclave.valores;
 			//agregar el arbol a valor
 			nodoclave.valores 	= nodovalor ;
+			NodoABB arbol = new ABBTurnos();
+			nodovalor.turnos = arbol;
 		}
+		
+		 
+		
+		
+		
+		
+		
 	}
 }
