@@ -2,6 +2,7 @@ package implementacion;
 
 import tda.ABBTDATurnos;
 import tda.IAgenda;
+import tda.TDAConjunto;
 
 public class AgendaDinamica implements IAgenda 
 {	
@@ -95,7 +96,7 @@ public class AgendaDinamica implements IAgenda
 	/** <B>inicializada.</B><BR><BR>
 	 * 
 	 * Elimina una fecha determinada a un medico determinado. Si no existe no hace nada.
-	 * @param medico   : Cadena de caracteres con el nombre del médico
+	 * @param medico   : Cadena de caracteres con el nombre del mï¿½dico
 	 * @param fecha    : Cadena de caracteres con la fecha del turno. El formato es <B>YYYYMMDD<B>
 	 * @return void
 	 * 
@@ -135,8 +136,8 @@ public class AgendaDinamica implements IAgenda
 	/** <B>inicializada.</B><BR><BR>
 	 * 
 	 * Elimina el o los turnos de un paciente determinado en una fecha determinada a un medico determinado. Si 
-	 * el médico o la fecha no existe no hace nada
-	 * @param medico   : Cadena de caracteres con el nombre del médico
+	 * el mï¿½dico o la fecha no existe no hace nada
+	 * @param medico   : Cadena de caracteres con el nombre del mï¿½dico
 	 * @param fecha    : Cadena de caracteres con la fecha del turno. El formato es <B>YYYYMMDD</B>
 	 * @param paciente : Cadena de caracteres con el nombre del paciente
 	 * @return void
@@ -175,4 +176,14 @@ public class AgendaDinamica implements IAgenda
 		}
 	}
 
+	/** <B>inicializada.</B><BR><BR>
+	 * 
+	 * Obtiene el conjunto de todos los mï¿½dicos que tienen turnos en el consultorio.
+	 * @return TDAConjunto con los nombres de los mï¿½dicos 
+	 * 
+	 * */
+	public TDAConjunto obtenerMedicos()
+	{
+		
+	}
 }
