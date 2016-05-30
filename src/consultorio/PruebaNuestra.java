@@ -1,8 +1,10 @@
 package consultorio;
 
 import implementacion.AgendaDinamica;
+import implementacion.ConjuntoEstaticoString;
 import implementacion.NodoClave;
 import tda.IAgenda;
+import tda.TDAConjunto;
 
 public class PruebaNuestra {
 
@@ -60,6 +62,14 @@ public class PruebaNuestra {
 		{
 			System.out.println("No Existe");
 		}
+		
+		TDAConjunto test = new ConjuntoEstaticoString();
+		test.inicializar();
+		test = agenda.obtenerMedicos();
+		System.out.println("Conjunto: " + test.elegir());
+		test.sacar("Yesica");
+		System.out.println("Conjunto2: " + test.elegir());
+		System.out.println("Conjunto3: " + test.elegir());
 		
 	}
 

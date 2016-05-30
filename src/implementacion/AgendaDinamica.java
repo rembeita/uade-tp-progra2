@@ -184,6 +184,18 @@ public class AgendaDinamica implements IAgenda
 	 * */
 	public TDAConjunto obtenerMedicos()
 	{
+		TDAConjunto resultado_conjunto = new ConjuntoEstaticoString();
+		resultado_conjunto.inicializar();
 		
+		NodoClave aux = primero;
+		
+		while (aux != null )
+		{
+			resultado_conjunto.agregar(aux.clave);
+			aux = aux.siguiente;
+		}
+		
+		
+		return resultado_conjunto;
 	}
 }
