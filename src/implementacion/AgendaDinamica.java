@@ -2,6 +2,7 @@ package implementacion;
 
 import tda.ABBTDATurnos;
 import tda.IAgenda;
+import tda.TDACola;
 import tda.TDAConjunto;
 
 public class AgendaDinamica implements IAgenda 
@@ -176,12 +177,7 @@ public class AgendaDinamica implements IAgenda
 		}
 	}
 
-	/** <B>inicializada.</B><BR><BR>
-	 * 
-	 * Obtiene el conjunto de todos los m�dicos que tienen turnos en el consultorio.
-	 * @return TDAConjunto con los nombres de los m�dicos 
-	 * 
-	 * */
+
 	public TDAConjunto obtenerMedicos()
 	{
 		TDAConjunto resultado_conjunto = new ConjuntoEstaticoString();
@@ -194,8 +190,20 @@ public class AgendaDinamica implements IAgenda
 			resultado_conjunto.agregar(aux.clave);
 			aux = aux.siguiente;
 		}
-		
-		
 		return resultado_conjunto;
 	}
+	
+	
+	/** <B>inicializada.</B><BR><BR>
+	 * 
+	 * Obtiene el conjunto de todas las fechas que tienen turnos en el consultorio ordenadas de menor a mayor.
+	 * @return TDACola con las fechas en las que hay turnos 
+	 * 
+	 * */
+	public TDACola obtenerFechas()
+	{
+		
+	}
+	
+
 }
