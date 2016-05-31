@@ -208,6 +208,7 @@ public class AgendaDinamica implements IAgenda
 	}
 	
 	
+	
 	public TDACola obtenerFechasMedico(String medico)
 	{
 		TDACola respuesta_cola = new ColaEstaticaString();
