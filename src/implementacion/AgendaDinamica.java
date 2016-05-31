@@ -1,5 +1,9 @@
 package implementacion;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import tda.ABBTDATurnos;
 import tda.IAgenda;
 import tda.TDACola;
@@ -177,7 +181,6 @@ public class AgendaDinamica implements IAgenda
 		}
 	}
 
-
 	public TDAConjunto obtenerMedicos()
 	{
 		TDAConjunto resultado_conjunto = new ConjuntoEstaticoString();
@@ -193,7 +196,6 @@ public class AgendaDinamica implements IAgenda
 		return resultado_conjunto;
 	}
 	
-	
 	/** <B>inicializada.</B><BR><BR>
 	 * 
 	 * Obtiene el conjunto de todas las fechas que tienen turnos en el consultorio ordenadas de menor a mayor.
@@ -205,5 +207,69 @@ public class AgendaDinamica implements IAgenda
 		
 	}
 	
-
+	
+	public TDACola obtenerFechasMedico(String medico)
+	{
+		TDACola respuesta_cola = new ColaEstaticaString();
+		respuesta_cola.inicializar();
+		
+		NodoClave nodoclave = buscarClave(medico);
+		NodoValor aux = nodoclave.valores;
+		List<String> lista = new ArrayList<String>();
+		
+		while ( aux != null) 
+		{
+			lista.add(aux.fecha);
+			aux = aux.sigFecha;
+		}
+		Collections.sort(lista);
+		
+		for (int i=0; i < lista.size(); i++)
+		{
+			respuesta_cola.acolar(lista.get(i));
+		}
+				
+		return respuesta_cola;
+		
+	}
+	
+	/** <B>inicializada.</B><BR><BR>
+	 * 
+	 * Obtiene todos los turnos que tiene el consultorio para una 
+	 * fecha determinada, ordenados de menor a mayor.
+	 * @param fecha : Cadena de caracteres con la fecha del turno. El formato es <B>YYYYMMDD</B>
+	 * @return Arreglo bidimensional que tiene en cada fila la fecha, el medico, el paciente y el turno,
+	 * ordenado por fecha, medico y turno 
+	 * 			  
+	 * */
+	public String[][] obtenerTurnosFecha(String fecha)
+	{}
+	
+	/** <B>inicializada.</B><BR><BR>
+	 * 
+	 * Obtiene el conjunto de todos los turnos que tienen en el consultorio para un 
+	 * m�dico determinado, ordenados de menor a mayor.
+	 * @param medico : Cadena de caracteres con el nombre del m�dico
+	 * @return Arreglo bidimensional que tiene en cada fila la fecha, el paciente y el turno,
+	 * ordenado por fecha y turno 
+	 * 			  
+	 * */
+	public String[][] obtenerTurnosMedico(String medico)
+	{}
+	
+	/** <B>inicializada.</B><BR><BR>
+	 * 
+	 * Obtiene el conjunto de todos los turnos que tienen en el consultorio para un 
+	 * m�dico determinado en una fecha determinada, ordenados de menor a mayor.
+	 * @param medico : Cadena de caracteres con el nombre del m�dico
+	 * @param fecha : Cadena de caracteres con la fecha del turno. El formato es <B>YYYYMMDD</B>
+	 * @return Arreglo bidimensional que tiene en cada fila la el paciente y el turno,
+	 * ordenado por turno 
+	 * 			  
+	 * */
+	public String[][] obtenerTurnosMedicoEnFecha(String medico, String fecha)
+	{}
+	
+	
+	
 }

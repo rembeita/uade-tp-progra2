@@ -4,6 +4,7 @@ import tda.TDACola;
 
 public class ColaEstaticaString implements TDACola 
 {
+	
 	String[] nombre;
 	int indice;
 	
@@ -37,6 +38,4 @@ public class ColaEstaticaString implements TDACola
 	{
 		return (indice == 0);
 	}
-	
-	
 }
