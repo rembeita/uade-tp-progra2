@@ -24,6 +24,8 @@ public class AgendaDinamica implements IAgenda
 		return aux ;
 	}
 	
+	
+	
 	public void inicializar(){
 		
 		primero = null;
@@ -108,34 +110,34 @@ public class AgendaDinamica implements IAgenda
 	 * */
 	public void eliminarFecha(String medico, String fecha)
 	{
-			if ( primero != null ) 
-			{
-				if ( primero.clave == medico) 
-				{					
-					EliminarValorEnNodo(primero, fecha);
-					if( primero.valores == null ) 
-					{
-						primero = primero.siguiente;
-					}
-				}
-				else 
-				{
-					NodoClave aux = primero;
-					while (aux.siguiente != null && aux.siguiente.clave != medico)
-					{
-						aux = aux.siguiente;
-					}
-					if( aux.siguiente != null ) 
-					{
-						EliminarValorEnNodo(aux. siguiente , fecha);
-						if (aux.siguiente.valores == null ) 
-						{
-							aux.siguiente = aux.siguiente.siguiente;
-						}
-					}
-				}
-			}
+		NodoClave nodoclave = buscarClave(medico);
+		if (nodoclave == null)
+		{
+			return;
 		}
+		NodoValor nodovalor = nodoclave.valores;
+		NodoValor nodovaloraux;
+		
+		if (nodovalor.fecha == fecha)
+		{
+			nodovalor = nodovalor.sigFecha;
+			return;
+		}
+		else
+		{
+			nodovaloraux = nodovalor.sigFecha;
+		}
+		
+		while (nodovaloraux != null && !(nodovaloraux.fecha == fecha))
+		{
+			nodovaloraux = nodovaloraux.sigFecha;
+			nodovalor = nodovalor.sigFecha;
+		}
+		nodovalor.sigFecha = nodovaloraux.sigFecha;
+		
+		
+		
+	}
 		
 	
 	/** <B>inicializada.</B><BR><BR>
@@ -196,18 +198,33 @@ public class AgendaDinamica implements IAgenda
 		return resultado_conjunto;
 	}
 	
-	/** <B>inicializada.</B><BR><BR>
-	 * 
-	 * Obtiene el conjunto de todas las fechas que tienen turnos en el consultorio ordenadas de menor a mayor.
-	 * @return TDACola con las fechas en las que hay turnos 
-	 * 
-	 * */
+	
 	public TDACola obtenerFechas()
 	{
+		NodoClave auxclave = primero;
+		NodoValor auxvalor;
+		TDACola respuesta_cola = new ColaEstaticaString();
+		respuesta_cola.inicializar();
+		List<String> lista = new ArrayList<String>();
+		while(auxclave != null)
+		{
+			auxvalor = auxclave.valores;
+			while (auxvalor != null)
+			{
+				lista.add(auxvalor.fecha);
+				auxvalor=auxvalor.sigFecha;
+			}
+			auxclave = auxclave.siguiente;
+		}
+		Collections.sort(lista);
 		
+		for (int i=0; i < lista.size(); i++)
+		{
+			respuesta_cola.acolar(lista.get(i));
+		}
+				
+		return respuesta_cola;
 	}
-	
-	
 	
 	public TDACola obtenerFechasMedico(String medico)
 	{
@@ -269,7 +286,11 @@ public class AgendaDinamica implements IAgenda
 	 * 			  
 	 * */
 	public String[][] obtenerTurnosMedicoEnFecha(String medico, String fecha)
-	{}
+	{
+		
+		
+		
+	}
 	
 	
 	
