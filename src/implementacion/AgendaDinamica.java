@@ -24,8 +24,7 @@ public class AgendaDinamica implements IAgenda
 		return aux ;
 	}
 	
-	
-	
+		
 	public void inicializar(){
 		
 		primero = null;
@@ -273,26 +272,29 @@ public class AgendaDinamica implements IAgenda
 	 * 			  
 	 * */
 	public String[][] obtenerTurnosMedico(String medico)
-	{}
-	
-	/** <B>inicializada.</B><BR><BR>
-	 * 
-	 * Obtiene el conjunto de todos los turnos que tienen en el consultorio para un 
-	 * m�dico determinado en una fecha determinada, ordenados de menor a mayor.
-	 * @param medico : Cadena de caracteres con el nombre del m�dico
-	 * @param fecha : Cadena de caracteres con la fecha del turno. El formato es <B>YYYYMMDD</B>
-	 * @return Arreglo bidimensional que tiene en cada fila la el paciente y el turno,
-	 * ordenado por turno 
-	 * 			  
-	 * */
+	{
+		NodoClave auxmedico = this.buscarClave(medico);
+		NodoValor auxvalor = auxmedico.valores;
+		String [][] resultado = new String[100][4];
+		String [][] resultado_final = null;
+		int contfilas = 0;
+		while (auxvalor != null)
+		{
+			this.cargaArbolMedico(auxvalor.turnos, resultado, contfilas, auxvalor.fecha);
+			auxvalor = auxvalor.sigFecha;
+		}
+		resultado_final = this.ordenarArrayMedico(resultado);
+		return resultado_final;
+	}
+
 	public String[][] obtenerTurnosMedicoEnFecha(String medico, String fecha)
 	{
 		NodoClave auxmedico = this.buscarClave(medico);
 		NodoValor auxvalor = auxmedico.valores;
 		String [][] resultado = new String[100][2];
 		String [][] resultado_final = null;
-		System.out.println("Este es fecha parametro: " + fecha);
-		System.out.println("Este es fecha valor: " + auxvalor.fecha);
+		//System.out.println("Este es fecha parametro: " + fecha);
+		//System.out.println("Este es fecha valor: " + auxvalor.fecha);
 		
 		
 		while (  auxvalor.fecha != fecha && auxvalor != null)
@@ -300,7 +302,7 @@ public class AgendaDinamica implements IAgenda
 			auxvalor = auxvalor.sigFecha;
 		}
 		
-		System.out.println("encontreee");
+		//System.out.println("encontreee");
 		
 		if (auxvalor != null)
 		{
@@ -321,15 +323,34 @@ public class AgendaDinamica implements IAgenda
 			{
 				contfilas++;
 			}
-			System.out.println("valores: " + arbol.paciente() + " " + arbol.turno() + " " + contfilas);
+			//System.out.println("valores: " + arbol.paciente() + " " + arbol.turno() + " " + contfilas);
 			resultado[contfilas][0] = arbol.paciente();
 			resultado[contfilas][1] = arbol.turno();
-
-
 			this.cargaArbol(arbol.hijoIzquierdo(), resultado, contfilas);
 			this.cargaArbol(arbol.hijoDerecho(), resultado, contfilas);
 		}
 	}
+	
+	private void cargaArbolMedico(ABBTDATurnos arbol, String[][] resultado, int contfilas, String fecha)
+	{
+
+		if(!arbol.arbolVacio())
+		{
+
+			while (resultado[contfilas][0] != null)
+			{
+				contfilas++;
+			}
+			System.out.println("valores: " + arbol.paciente() + " " + arbol.turno() + " " + fecha);
+			//System.out.println("valores: " + arbol.paciente() + " " + arbol.turno() + " " + contfilas);
+			resultado[contfilas][0] = arbol.paciente();
+			resultado[contfilas][1] = arbol.turno();
+			resultado[contfilas][2] = fecha;
+			this.cargaArbolMedico(arbol.hijoIzquierdo(), resultado, contfilas, fecha);
+			this.cargaArbolMedico(arbol.hijoDerecho(), resultado, contfilas, fecha);
+		}
+	}
+	
 	
 	private String[][] ordenarArray(String[][] procesar)
 	{
@@ -357,5 +378,55 @@ public class AgendaDinamica implements IAgenda
 		}
 		return procesar;
 	}
+	
+	private String[][] ordenarArrayMedico(String[][] procesar)
+	{
+		int j;
+		for (j=0; procesar[j][0] != null; j++)
+		{}
+		System.out.println("valor j: " + j);
+		String[][] auxresultado = new String[j][3];
+		for (int h=0; h < j; h++)
+		{
+			for (int i=0; i < j-1; i++)
+			{
+				if (procesar[i][2].compareTo(procesar[i+1][2]) > 0 )
+				{
+					//System.out.println("cambio");
+					//System.out.println("DALEE " + procesar[i][0]);
+					auxresultado[i][0] = procesar[i][0];
+					auxresultado[i][1] = procesar[i][1];
+					auxresultado[i][2] = procesar[i][2];
+
+					procesar[i][0] = procesar[i+1][0];
+					procesar[i][1] = procesar[i+1][1];
+					procesar[i][2] = procesar[i+1][2];
+
+					procesar[i+1][0] = auxresultado[i][0];
+					procesar[i+1][1] = auxresultado[i][1];
+					procesar[i+1][2] = auxresultado[i][2];
+
+				}
+				else if (procesar[i][1].compareTo(procesar[i+1][1]) > 0)
+				{
+					//System.out.println("cambio");
+					//System.out.println("DALEE " + procesar[i][0]);
+					auxresultado[i][0] = procesar[i][0];
+					auxresultado[i][1] = procesar[i][1];
+					auxresultado[i][2] = procesar[i][2];
+
+					procesar[i][0] = procesar[i+1][0];
+					procesar[i][1] = procesar[i+1][1];
+					procesar[i][2] = procesar[i+1][2];
+
+					procesar[i+1][0] = auxresultado[i][0];
+					procesar[i+1][1] = auxresultado[i][1];
+					procesar[i+1][2] = auxresultado[i][2];
+				}
+			}
+		}
+		return procesar;
+	}
+	
 	
 }

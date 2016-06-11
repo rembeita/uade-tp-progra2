@@ -22,11 +22,16 @@ public class PruebaNuestra {
 		agenda.agregar("Yesica", "20160528", "paciente3", "09:00");
 		agenda.agregar("Yesica", "20160528", "paciente4", "15:00");
 		agenda.agregar("Yesica", "20160528", "paciente4", "08:00");
+		
+		agenda.agregar("Yesica", "20160530", "paciente2", "17:00");
+		agenda.agregar("Yesica", "20160514", "paciente3", "18:00");
+		agenda.agregar("Yesica", "20160511", "paciente4", "16:30");
+		agenda.agregar("Yesica", "20160523", "paciente4", "14:00");
 		//agenda.eliminar("Yesica");
 		
 		NodoClave rtanodoclave;
 		rtanodoclave = agenda.mostrarMedico("Yesica");
-		if (rtanodoclave != null)
+/*		if (rtanodoclave != null)
 		{
 			//System.out.println("entre!!");
 			System.out.println("Nombre: " + rtanodoclave.clave);
@@ -42,10 +47,12 @@ public class PruebaNuestra {
 		{
 			System.out.println("No Existe");
 		}
-		
+	*/	
 		//agenda.eliminarTurno("Yesica", "20160528", "Josefo4");
 		
 		rtanodoclave = agenda.mostrarMedico("Yesica");
+		
+		/*
 		if (rtanodoclave != null)
 		{
 			System.out.println("####################!!");
@@ -62,7 +69,7 @@ public class PruebaNuestra {
 		{
 			System.out.println("No Existe");
 		}
-		
+		*/
 		TDAConjunto test = new ConjuntoEstaticoString();
 		test.inicializar();
 		test = agenda.obtenerMedicos();
@@ -74,11 +81,20 @@ public class PruebaNuestra {
 		System.out.println("####################!!");
 		String [][] teststring = new String[100][2];
 		teststring = agenda.obtenerTurnosMedicoEnFecha("Yesica", "20160528");
-		System.out.println("#########PRUEBAAAAAA");
+		System.out.println("#########OBTENER TURnOS MEDICO en FECHA Yesica 20160528");
 		for (int i=0 ; teststring[i][0] != null; i++)
 		{
-			System.out.println("Valores: " + teststring[i][0] + " " + teststring[i][1] );
+			System.out.println("obtenerTurnosMedico en FECHA: " + teststring[i][0] + " " + teststring[i][1] );
 		}
+		
+		System.out.println("####################OBTENER TURnOS MEDICO Yesica");
+		String [][] teststring2;
+		teststring2 = agenda.obtenerTurnosMedico("Yesica");
+		for (int l=0 ; teststring2[l][0] != null; l++)
+		{
+			System.out.println("obtenerTurnosMedico: " + teststring2[l][0] + " " + teststring2[l][1] + "  " + teststring2[l][2]);
+		}
+		
 	}
 
 }
