@@ -21,7 +21,7 @@ public class PruebaNuestra {
 		agenda.agregar("Yesica", "20160528", "paciente2", "14:00");
 		agenda.agregar("Yesica", "20160528", "paciente3", "09:00");
 		agenda.agregar("Yesica", "20160528", "paciente4", "15:00");
-
+		agenda.agregar("Yesica", "20160528", "paciente4", "08:00");
 		//agenda.eliminar("Yesica");
 		
 		NodoClave rtanodoclave;

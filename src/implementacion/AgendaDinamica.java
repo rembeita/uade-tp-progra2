@@ -338,21 +338,23 @@ public class AgendaDinamica implements IAgenda
 		{}
 		System.out.println("valor j: " + j);
 		String[][] auxresultado = new String[j][2];
-		for (int i=0; i < j-1; i++)
+		for (int h=0; h < j; h++)
 		{
-			if (procesar[i][1].compareTo(procesar[i+1][1]) > 0 )
+			for (int i=0; i < j-1; i++)
 			{
-				//System.out.println("cambio");
-				//System.out.println("DALEE " + procesar[i][0]);
-				auxresultado[i][0] = procesar[i][0];
-				auxresultado[i][1] = procesar[i][1];
-				procesar[i][0] = procesar[i+1][0];
-				procesar[i][1] = procesar[i+1][1];
-				procesar[i+1][0] = auxresultado[i][0];
-				procesar[i+1][1] = auxresultado[i][1];
+				if (procesar[i][1].compareTo(procesar[i+1][1]) > 0 )
+				{
+					//System.out.println("cambio");
+					//System.out.println("DALEE " + procesar[i][0]);
+					auxresultado[i][0] = procesar[i][0];
+					auxresultado[i][1] = procesar[i][1];
+					procesar[i][0] = procesar[i+1][0];
+					procesar[i][1] = procesar[i+1][1];
+					procesar[i+1][0] = auxresultado[i][0];
+					procesar[i+1][1] = auxresultado[i][1];
+				}
 			}
 		}
-		
 		return procesar;
 	}
 	
