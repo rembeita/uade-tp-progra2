@@ -287,11 +287,73 @@ public class AgendaDinamica implements IAgenda
 	 * */
 	public String[][] obtenerTurnosMedicoEnFecha(String medico, String fecha)
 	{
+		NodoClave auxmedico = this.buscarClave(medico);
+		NodoValor auxvalor = auxmedico.valores;
+		String [][] resultado = new String[100][2];
+		String [][] resultado_final = null;
+		System.out.println("Este es fecha parametro: " + fecha);
+		System.out.println("Este es fecha valor: " + auxvalor.fecha);
 		
 		
+		while (  auxvalor.fecha != fecha && auxvalor != null)
+		{
+			auxvalor = auxvalor.sigFecha;
+		}
 		
+		System.out.println("encontreee");
+		
+		if (auxvalor != null)
+		{
+			int contfilas = 0;
+			this.cargaArbol(auxvalor.turnos, resultado, contfilas);
+
+			//System.out.println("filas: " + contfilas);
+			resultado_final = this.ordenarArray(resultado);
+		}
+		return resultado_final;
 	}
 	
+	private void cargaArbol(ABBTDATurnos arbol, String[][] resultado, int contfilas)
+	{
+		if(!arbol.arbolVacio())
+		{
+			while (resultado[contfilas][0] != null)
+			{
+				contfilas++;
+			}
+			System.out.println("valores: " + arbol.paciente() + " " + arbol.turno() + " " + contfilas);
+			resultado[contfilas][0] = arbol.paciente();
+			resultado[contfilas][1] = arbol.turno();
+
+
+			this.cargaArbol(arbol.hijoIzquierdo(), resultado, contfilas);
+			this.cargaArbol(arbol.hijoDerecho(), resultado, contfilas);
+		}
+	}
 	
+	private String[][] ordenarArray(String[][] procesar)
+	{
+		int j;
+		for (j=0; procesar[j][0] != null; j++)
+		{}
+		System.out.println("valor j: " + j);
+		String[][] auxresultado = new String[j][2];
+		for (int i=0; i < j-1; i++)
+		{
+			if (procesar[i][1].compareTo(procesar[i+1][1]) > 0 )
+			{
+				//System.out.println("cambio");
+				//System.out.println("DALEE " + procesar[i][0]);
+				auxresultado[i][0] = procesar[i][0];
+				auxresultado[i][1] = procesar[i][1];
+				procesar[i][0] = procesar[i+1][0];
+				procesar[i][1] = procesar[i+1][1];
+				procesar[i+1][0] = auxresultado[i][0];
+				procesar[i+1][1] = auxresultado[i][1];
+			}
+		}
+		
+		return procesar;
+	}
 	
 }

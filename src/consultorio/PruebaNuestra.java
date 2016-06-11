@@ -14,13 +14,13 @@ public class PruebaNuestra {
 		System.out.println("Creando Agenda");
 		IAgenda agenda = new AgendaDinamica();
 		agenda.inicializar();
-		agenda.agregar("Yesica", "20160528", "Josefo", "10:00");
-		agenda.agregar("Claudio", "20160528", "Roberto", "10:00");
+		agenda.agregar("Yesica", "20160528", "paciente1", "10:00");
+		agenda.agregar("Claudio", "20160528", "pacienteclau", "10:00");
 		//agenda.agregar("Yesica", "20160528", "Josefo2", "11:00");
 		//agenda.agregar("Yesica", "20160528", "Josefo3", "09:00");
-		agenda.agregar("Yesica", "20160528", "Josefo4", "14:00");
-		agenda.agregar("Yesica", "20160528", "Josefo4", "09:00");
-		agenda.agregar("Yesica", "20160528", "Josefo4", "15:00");
+		agenda.agregar("Yesica", "20160528", "paciente2", "14:00");
+		agenda.agregar("Yesica", "20160528", "paciente3", "09:00");
+		agenda.agregar("Yesica", "20160528", "paciente4", "15:00");
 
 		//agenda.eliminar("Yesica");
 		
@@ -43,7 +43,7 @@ public class PruebaNuestra {
 			System.out.println("No Existe");
 		}
 		
-		agenda.eliminarTurno("Yesica", "20160528", "Josefo4");
+		//agenda.eliminarTurno("Yesica", "20160528", "Josefo4");
 		
 		rtanodoclave = agenda.mostrarMedico("Yesica");
 		if (rtanodoclave != null)
@@ -71,6 +71,14 @@ public class PruebaNuestra {
 		System.out.println("Conjunto2: " + test.elegir());
 		System.out.println("Conjunto3: " + test.elegir());
 		
+		System.out.println("####################!!");
+		String [][] teststring = new String[100][2];
+		teststring = agenda.obtenerTurnosMedicoEnFecha("Yesica", "20160528");
+		System.out.println("#########PRUEBAAAAAA");
+		for (int i=0 ; teststring[i][0] != null; i++)
+		{
+			System.out.println("Valores: " + teststring[i][0] + " " + teststring[i][1] );
+		}
 	}
 
 }
