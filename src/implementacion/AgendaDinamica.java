@@ -317,7 +317,7 @@ public class AgendaDinamica implements IAgenda
 			{
 				contfilas++;
 			}
-			//System.out.println("valores: " + arbol.paciente() + " " + arbol.turno() + " " + contfilas);
+			
 			resultado[contfilas][0] = arbol.paciente();
 			resultado[contfilas][1] = arbol.turno();
 			this.cargaArbol(arbol.hijoIzquierdo(), resultado, contfilas);
@@ -336,7 +336,7 @@ public class AgendaDinamica implements IAgenda
 			{
 				contfilas++;
 			}
-			System.out.println("valores: " + arbol.paciente() + " " + arbol.turno() + " " + fecha);
+			//System.out.println("valores: " + arbol.paciente() + " " + arbol.turno() + " " + fecha);
 			//System.out.println("valores: " + arbol.paciente() + " " + arbol.turno() + " " + contfilas);
 			resultado[contfilas][0] = arbol.paciente();
 			resultado[contfilas][1] = arbol.turno();
@@ -367,9 +367,7 @@ public class AgendaDinamica implements IAgenda
 	private String[][] ordenarArray(String[][] procesar)
 	{
 		int j;
-		for (j=0; procesar[j][0] != null; j++)
-		{}
-		//System.out.println("valor j: " + j);
+		j=lenght_mularray(procesar);
 		String[][] auxresultado = new String[j][2];
 		for (int h=0; h < j; h++)
 		{
@@ -393,59 +391,63 @@ public class AgendaDinamica implements IAgenda
 	
 	private String[][] ordenarArrayMedico(String[][] procesar)
 	{
-		int j;
-		for (j=0; procesar[j][0] != null; j++)
-		{}
-		//System.out.println("valor j: " + j);
-		String[][] auxresultado = new String[j][3];
-		for (int h=0; h < j; h++)
+		int longitud, i, j;
+		longitud=lenght_mularray(procesar);
+		String[][] auxresultado = new String[longitud][3];
+		for (i=0; i < longitud; i++)
 		{
-			for (int i=0; i < j-1; i++)
+			for (j=0; j < longitud-1; j++)
 			{
-				if (procesar[i][2].compareTo(procesar[i+1][2]) > 0 )
+				if (procesar[j][2].compareTo(procesar[j+1][2]) > 0 )
 				{
-					//System.out.println("cambio");
 					//System.out.println("DALEE " + procesar[i][0]);
-					auxresultado[i][0] = procesar[i][0];
-					auxresultado[i][1] = procesar[i][1];
-					auxresultado[i][2] = procesar[i][2];
-
-					procesar[i][0] = procesar[i+1][0];
-					procesar[i][1] = procesar[i+1][1];
-					procesar[i][2] = procesar[i+1][2];
-
-					procesar[i+1][0] = auxresultado[i][0];
-					procesar[i+1][1] = auxresultado[i][1];
-					procesar[i+1][2] = auxresultado[i][2];
-
+					auxresultado[0][0] = procesar[j+1][0];
+					auxresultado[0][1] = procesar[j+1][1];
+					auxresultado[0][2] = procesar[j+1][2];
+					
+					procesar[j+1][0] = procesar[j][0];
+					procesar[j+1][1] = procesar[j][1];
+					procesar[j+1][2] = procesar[j][2];
+					
+					procesar[j][0] = auxresultado[0][0];
+					procesar[j][1] = auxresultado[0][1];
+					procesar[j][2] = auxresultado[0][2];
 				}
-				else if (procesar[i][1].compareTo(procesar[i+1][1]) > 0)
-				{
-					//System.out.println("cambio");
-					//System.out.println("DALEE " + procesar[i][0]);
-					auxresultado[i][0] = procesar[i][0];
-					auxresultado[i][1] = procesar[i][1];
-					auxresultado[i][2] = procesar[i][2];
-
-					procesar[i][0] = procesar[i+1][0];
-					procesar[i][1] = procesar[i+1][1];
-					procesar[i][2] = procesar[i+1][2];
-
-					procesar[i+1][0] = auxresultado[i][0];
-					procesar[i+1][1] = auxresultado[i][1];
-					procesar[i+1][2] = auxresultado[i][2];
-				}
+							
 			}
 		}
+		
+		for (i=0; i < longitud; i++)
+		{
+			for (j=0; j < longitud-1; j++)
+			{
+				if (procesar[j][1].compareTo(procesar[j+1][1]) > 0 && procesar[j][2].equals(procesar[j+1][2]))
+				{
+					//System.out.println("DALEE " + procesar[i][0]);
+					auxresultado[0][0] = procesar[j+1][0];
+					auxresultado[0][1] = procesar[j+1][1];
+					auxresultado[0][2] = procesar[j+1][2];
+					
+					procesar[j+1][0] = procesar[j][0];
+					procesar[j+1][1] = procesar[j][1];
+					procesar[j+1][2] = procesar[j][2];
+				
+					procesar[j][0] = auxresultado[0][0];
+					procesar[j][1] = auxresultado[0][1];
+					procesar[j][2] = auxresultado[0][2];
+				
+				}
+							
+			}
+		}
+		
 		return procesar;
 	}
 	
 	private String[][] ordenarArrayFecha(String[][] procesar)
 	{
 		int longitud, i, j;
-		for (longitud=0; procesar[longitud][0] != null; longitud++)
-		{}
-		System.out.println("valor longitud: " + longitud);
+		longitud=lenght_mularray(procesar);
 		String[][] auxresultado = new String[1][4];
 
 		for (i=0; i < longitud; i++)
@@ -506,5 +508,14 @@ public class AgendaDinamica implements IAgenda
 			
 		return procesar;
 	}
-		
+
+	private int lenght_mularray(String[][] procesar)
+	{
+		int longitud;
+		for (longitud=0; procesar[longitud][0] != null; longitud++)
+		{}
+		return longitud;
+	}
+	
+	
 }
