@@ -474,6 +474,35 @@ public class AgendaDinamica implements IAgenda
 							
 			}
 		}
+		
+		for (i=0; i < longitud; i++)
+		{
+			for (j=0; j < longitud-1; j++)
+			{
+				if (procesar[j][1].compareTo(procesar[j+1][1]) > 0 && procesar[j][3].equals(procesar[j+1][3]))
+				{
+					//System.out.println("DALEE " + procesar[i][0]);
+					auxresultado[0][0] = procesar[j+1][0];
+					auxresultado[0][1] = procesar[j+1][1];
+					auxresultado[0][2] = procesar[j+1][2];
+					auxresultado[0][3] = procesar[j+1][3];
+					
+					procesar[j+1][0] = procesar[j][0];
+					procesar[j+1][1] = procesar[j][1];
+					procesar[j+1][2] = procesar[j][2];
+					procesar[j+1][3] = procesar[j][3];
+
+					procesar[j][0] = auxresultado[0][0];
+					procesar[j][1] = auxresultado[0][1];
+					procesar[j][2] = auxresultado[0][2];
+					procesar[j][3] = auxresultado[0][3];
+
+				}
+							
+			}
+		}
+		
+		
 			
 		return procesar;
 	}
