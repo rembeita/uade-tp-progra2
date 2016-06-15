@@ -117,7 +117,7 @@ public class AgendaDinamica implements IAgenda
 		
 		if (nodovalor.fecha == fecha)
 		{
-			nodovalor = nodovalor.sigFecha;
+			nodoclave.valores = nodovalor.sigFecha;
 			return;
 		}
 		else
@@ -226,15 +226,7 @@ public class AgendaDinamica implements IAgenda
 		
 	}
 	
-	/** <B>inicializada.</B><BR><BR>
-	 * 
-	 * Obtiene todos los turnos que tiene el consultorio para una 
-	 * fecha determinada, ordenados de menor a mayor.
-	 * @param fecha : Cadena de caracteres con la fecha del turno. El formato es <B>YYYYMMDD</B>
-	 * @return Arreglo bidimensional que tiene en cada fila la fecha, el medico, el paciente y el turno,
-	 * ordenado por fecha, medico y turno 
-	 * 			  
-	 * */
+	
 	public String[][] obtenerTurnosFecha(String fecha)
 	{
 		NodoClave aux = primero;
@@ -246,11 +238,10 @@ public class AgendaDinamica implements IAgenda
 		while (aux != null)
 		{
 			auxvalor = aux.valores;
-			while (  auxvalor.fecha != fecha && auxvalor != null)
+			while ( auxvalor != null && auxvalor.fecha != fecha )
 			{
 				auxvalor = auxvalor.sigFecha;
 			}
-			
 			if (auxvalor != null)
 			{
 				int contfilas = 0;
@@ -367,7 +358,7 @@ public class AgendaDinamica implements IAgenda
 	private String[][] ordenarArray(String[][] procesar)
 	{
 		int j;
-		j=lenght_mularray(procesar);
+		j=filas_mularray(procesar);
 		String[][] auxresultado = new String[j][2];
 		for (int h=0; h < j; h++)
 		{
@@ -392,7 +383,7 @@ public class AgendaDinamica implements IAgenda
 	private String[][] ordenarArrayMedico(String[][] procesar)
 	{
 		int longitud, i, j;
-		longitud=lenght_mularray(procesar);
+		longitud=filas_mularray(procesar);
 		String[][] auxresultado = new String[longitud][3];
 		for (i=0; i < longitud; i++)
 		{
@@ -447,7 +438,7 @@ public class AgendaDinamica implements IAgenda
 	private String[][] ordenarArrayFecha(String[][] procesar)
 	{
 		int longitud, i, j;
-		longitud=lenght_mularray(procesar);
+		longitud=filas_mularray(procesar);
 		String[][] auxresultado = new String[1][4];
 
 		for (i=0; i < longitud; i++)
@@ -504,12 +495,10 @@ public class AgendaDinamica implements IAgenda
 			}
 		}
 		
-		
-			
 		return procesar;
 	}
 
-	private int lenght_mularray(String[][] procesar)
+	private int filas_mularray(String[][] procesar)
 	{
 		int longitud;
 		for (longitud=0; procesar[longitud][0] != null; longitud++)
@@ -518,4 +507,6 @@ public class AgendaDinamica implements IAgenda
 	}
 	
 	
+		
+
 }

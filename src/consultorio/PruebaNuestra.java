@@ -62,22 +62,24 @@ public class PruebaNuestra {
 			System.out.println("obtenerTurnosMedico: " + teststring2[l][0] + " " + teststring2[l][1] + "  " + teststring2[l][2]);
 		}
 		
+		
+		System.out.println("####################ELIMINANDOOOOOOOO A YESICA");
+		agenda.eliminarFecha("Yesica-", "20160528");
 		/*
-		System.out.println("####################ELIMINANDOOOOOOOO");
-		agenda.eliminarFecha("Yesica", "20160528");
 		System.out.println("####################ELIMINANDOOOOO OBTENER TURNOS MEDICO Yesica");
-		teststring2 = agenda.obtenerTurnosMedico("Yesica");
+		teststring2 = agenda.obtenerTurnosMedico("Yesica-");
 		for (int l=0 ; teststring2[l][0] != null; l++)
 		{
 			System.out.println("obtenerTurnosMedico: " + teststring2[l][0] + " " + teststring2[l][1] + "  " + teststring2[l][2]);
 		}
-		
 		*/
+		
 		System.out.println("####################CONSULTANDO POR FECHA");
 		teststring2 = agenda.obtenerTurnosFecha("20160528");
 		for (int l=0 ; teststring2[l][0] != null; l++)
 		{
 			System.out.println("obtenerTurnosFecha: " + teststring2[l][0] + " " + teststring2[l][1] + " " + teststring2[l][2] + "  " + teststring2[l][3]);
 		}
+		
 	}
 }
