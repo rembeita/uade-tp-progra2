@@ -17,14 +17,13 @@ public class AgendaDinamica implements IAgenda
 	{	
 		NodoClave aux = primero;
 		
-		while (aux != null && aux.clave!= medico)
+		while (aux != null && aux.clave != medico)
 		{
 			aux = aux.siguiente;
 		}
 		return aux ;
 	}
-	
-		
+			
 	public void inicializar(){
 		
 		primero = null;
@@ -67,7 +66,6 @@ public class AgendaDinamica implements IAgenda
 		}
 		
 	}
-
 
 	public void eliminar(String medico)
 	{
@@ -133,12 +131,10 @@ public class AgendaDinamica implements IAgenda
 			nodovalor = nodovalor.sigFecha;
 		}
 		nodovalor.sigFecha = nodovaloraux.sigFecha;
-		
-		
+			
 		
 	}
 		
-	
 	/** <B>inicializada.</B><BR><BR>
 	 * 
 	 * Elimina el o los turnos de un paciente determinado en una fecha determinada a un medico determinado. Si 
@@ -162,26 +158,7 @@ public class AgendaDinamica implements IAgenda
 		
 		aux.turnos.eliminar(paciente);
     }
-	
-	private void EliminarValorEnNodo( NodoClave nodo , int valor) 
-	{
-		i f ( nodo . valores!= nul l ) {
-			i f (nodo . valores. valor == valor) {
-				nodo . valores = nodo . valores. sigValor;
-			}
-			e l s e {
-				NodoValor aux = nodo . valores;
-				whi le (aux . sigValor != nul l && aux. sigValor.valor
-						!= valor){
-					aux = aux. sigValor;
-				}
-				i f ( aux. sigValor!= nul l ) {
-					aux. sigValor= aux. sigValor. sigValor;
-				}
-			}
-		}
-	}
-
+		
 	public TDAConjunto obtenerMedicos()
 	{
 		TDAConjunto resultado_conjunto = new ConjuntoEstaticoString();
@@ -196,8 +173,7 @@ public class AgendaDinamica implements IAgenda
 		}
 		return resultado_conjunto;
 	}
-	
-	
+		
 	public TDACola obtenerFechas()
 	{
 		NodoClave auxclave = primero;
@@ -260,17 +236,35 @@ public class AgendaDinamica implements IAgenda
 	 * 			  
 	 * */
 	public String[][] obtenerTurnosFecha(String fecha)
-	{}
+	{
+		NodoClave aux = primero;
+		NodoValor auxvalor; 
+
+		String [][] resultado = new String[100][4];
+		String [][] resultado_final = null;
+		
+		while (aux != null)
+		{
+			auxvalor = aux.valores;
+			while (  auxvalor.fecha != fecha && auxvalor != null)
+			{
+				auxvalor = auxvalor.sigFecha;
+			}
+			
+			if (auxvalor != null)
+			{
+				int contfilas = 0;
+				this.cargaArbolFecha(auxvalor.turnos, resultado, contfilas, fecha, aux.clave);
+			}
+			aux = aux.siguiente;
+			
+		}
+		
+		resultado_final = this.ordenarArrayFecha(resultado);
+		return resultado_final;
+		
+	}
 	
-	/** <B>inicializada.</B><BR><BR>
-	 * 
-	 * Obtiene el conjunto de todos los turnos que tienen en el consultorio para un 
-	 * m�dico determinado, ordenados de menor a mayor.
-	 * @param medico : Cadena de caracteres con el nombre del m�dico
-	 * @return Arreglo bidimensional que tiene en cada fila la fecha, el paciente y el turno,
-	 * ordenado por fecha y turno 
-	 * 			  
-	 * */
 	public String[][] obtenerTurnosMedico(String medico)
 	{
 		NodoClave auxmedico = this.buscarClave(medico);
@@ -332,6 +326,7 @@ public class AgendaDinamica implements IAgenda
 	}
 	
 	private void cargaArbolMedico(ABBTDATurnos arbol, String[][] resultado, int contfilas, String fecha)
+
 	{
 
 		if(!arbol.arbolVacio())
@@ -350,14 +345,31 @@ public class AgendaDinamica implements IAgenda
 			this.cargaArbolMedico(arbol.hijoDerecho(), resultado, contfilas, fecha);
 		}
 	}
-	
+
+	private void cargaArbolFecha(ABBTDATurnos arbol, String[][] resultado, int contfilas, String fecha, String medico)
+	{
+		if(!arbol.arbolVacio())
+		{
+			while (resultado[contfilas][0] != null)
+			{
+				contfilas++;
+			}
+			resultado[contfilas][0] = arbol.paciente();
+			resultado[contfilas][1] = arbol.turno();
+			resultado[contfilas][2] = fecha;
+			resultado[contfilas][3] = medico;
+
+			this.cargaArbolFecha(arbol.hijoIzquierdo(), resultado, contfilas, fecha, medico);
+			this.cargaArbolFecha(arbol.hijoDerecho(), resultado, contfilas, fecha, medico);
+		}
+	}
 	
 	private String[][] ordenarArray(String[][] procesar)
 	{
 		int j;
 		for (j=0; procesar[j][0] != null; j++)
 		{}
-		System.out.println("valor j: " + j);
+		//System.out.println("valor j: " + j);
 		String[][] auxresultado = new String[j][2];
 		for (int h=0; h < j; h++)
 		{
@@ -384,7 +396,7 @@ public class AgendaDinamica implements IAgenda
 		int j;
 		for (j=0; procesar[j][0] != null; j++)
 		{}
-		System.out.println("valor j: " + j);
+		//System.out.println("valor j: " + j);
 		String[][] auxresultado = new String[j][3];
 		for (int h=0; h < j; h++)
 		{
@@ -427,6 +439,62 @@ public class AgendaDinamica implements IAgenda
 		}
 		return procesar;
 	}
+	
+	private String[][] ordenarArrayFecha(String[][] procesar)
+	{
+		int j;
+		for (j=0; procesar[j][0] != null; j++)
+		{}
+		//System.out.println("valor j: " + j);
+		String[][] auxresultado = new String[j][4];
+		for (int h=0; h < j; h++)
+		{
+			for (int i=0; i < j-1; i++)
+			{
+				if (procesar[i][2].compareTo(procesar[i+1][2]) > 0 )
+				{
+					//System.out.println("cambio");
+					//System.out.println("DALEE " + procesar[i][0]);
+					auxresultado[i][0] = procesar[i][0];
+					auxresultado[i][1] = procesar[i][1];
+					auxresultado[i][2] = procesar[i][2];
+					auxresultado[i][3] = procesar[i][3];
+
+					procesar[i][0] = procesar[i+1][0];
+					procesar[i][1] = procesar[i+1][1];
+					procesar[i][2] = procesar[i+1][2];
+					procesar[i][3] = procesar[i+1][3];
+
+					procesar[i+1][0] = auxresultado[i][0];
+					procesar[i+1][1] = auxresultado[i][1];
+					procesar[i+1][2] = auxresultado[i][2];
+					procesar[i+1][3] = auxresultado[i][3];
+
+				}
+				else if (procesar[i][1].compareTo(procesar[i+1][1]) > 0)
+				{
+					//System.out.println("cambio");
+					//System.out.println("DALEE " + procesar[i][0]);
+					auxresultado[i][0] = procesar[i][0];
+					auxresultado[i][1] = procesar[i][1];
+					auxresultado[i][2] = procesar[i][2];
+					auxresultado[i][3] = procesar[i][3];
+					
+					procesar[i][0] = procesar[i+1][0];
+					procesar[i][1] = procesar[i+1][1];
+					procesar[i][2] = procesar[i+1][2];
+					procesar[i][3] = procesar[i+1][3];
+
+					procesar[i+1][0] = auxresultado[i][0];
+					procesar[i+1][1] = auxresultado[i][1];
+					procesar[i+1][2] = auxresultado[i][2];
+					procesar[i+1][3] = auxresultado[i][3];
+				}
+			}
+		}
+		return procesar;
+	}
+	
 	
 	
 }
