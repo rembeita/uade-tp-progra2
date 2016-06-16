@@ -34,7 +34,6 @@ public class AgendaDinamica implements IAgenda
 		
 		if(validarhora(turno) != true)
 		{
-			System.out.println("fruta");
 			return;
 		}
 		NodoClave nodoclave = buscarClave(medico);
