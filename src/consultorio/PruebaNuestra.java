@@ -14,9 +14,9 @@ public class PruebaNuestra {
 		System.out.println("Creando Agenda");
 		IAgenda agenda = new AgendaDinamica();
 		agenda.inicializar();
-		agenda.agregar("Yesica-", "20160528", "paciente1yesi", "10:00");
-		agenda.agregar("Yesica-", "20160528", "Josefo2yesi33", "11:00");
-		agenda.agregar("Yesica-", "20160528", "Josefo33yesi1", "09:00");
+		agenda.agregar("Yesica-", "20160528", "paciente1yesi", "12:04");
+		agenda.agregar("Yesica-", "20160528", "Josefo2yesi33", "11:03");
+		agenda.agregar("Yesica-", "20160528", "Josefo33yesi1", "09:02");
 		agenda.agregar("Yesica-", "20160528", "pacienteyesi2", "14:00");
 		agenda.agregar("Yesica-", "20160528", "pacienteyesi3", "09:00");
 		agenda.agregar("Yesica-", "20160528", "pacienteyesi4", "15:00");
@@ -31,9 +31,9 @@ public class PruebaNuestra {
 		agenda.agregar("Claudio", "20160528", "pacienteclau4", "13:00");
 
 		//agenda.eliminar("Yesica");
-		/*
-		//agenda.eliminarTurno("Yesica", "20160528", "Josefo4");
 		
+		agenda.eliminarTurno("Yesica-", "20160528", "Josefo33yesi1");
+		/*
 		rtanodoclave = agenda.mostrarMedico("Yesica");
 		
 				

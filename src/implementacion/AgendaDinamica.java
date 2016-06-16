@@ -31,6 +31,12 @@ public class AgendaDinamica implements IAgenda
 
 	public void agregar(String medico, String fecha, String paciente, String turno)
 	{
+		
+		if(validarhora(turno) != true)
+		{
+			System.out.println("fruta");
+			return;
+		}
 		NodoClave nodoclave = buscarClave(medico);
 		
 		if (nodoclave==null)
@@ -225,8 +231,7 @@ public class AgendaDinamica implements IAgenda
 		return respuesta_cola;
 		
 	}
-	
-	
+		
 	public String[][] obtenerTurnosFecha(String fecha)
 	{
 		NodoClave aux = primero;
@@ -506,6 +511,23 @@ public class AgendaDinamica implements IAgenda
 		return longitud;
 	}
 	
+	private boolean validarhora(String hora)
+	{
+		boolean resultado=true;
+	    //09:05
+		String[] partes = hora.split(":");
+		//System.out.println("partes" + partes[1]);
+		int parte1 = Integer.parseInt(partes[0]); 
+		int parte2 = Integer.parseInt(partes[1]);  
+		
+		if (!(( parte1 < 18 && parte1 >= 8 && (parte2 == 0 || parte2 == 15 
+				|| parte2 == 30 || parte2 == 45))))
+		{
+			resultado= false;
+		}
+		
+		return resultado;
+	}
 	
 		
 
