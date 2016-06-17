@@ -161,13 +161,23 @@ public class AgendaDinamica implements IAgenda
 			aux = aux.sigFecha;
 		}
 		
-		aux.turnos.eliminar(paciente);
+	
+		boolean flag= this.existePaciente(aux.turnos, paciente);
+
+
+		while (flag == true)
+		{
+			aux.turnos.eliminar(paciente);
+			flag=false;
+			flag= this.existePaciente(aux.turnos, paciente);
+		}
+
 		
 		if (aux.turnos.arbolVacio())
 		{
 			NodoClave auxborrar = primero;
 			NodoClave auxborrarsiguiente = auxborrar.siguiente;
-			System.out.println("ENTREEEEEEEEEEEE");
+
 			if (auxborrar.clave == medico)
 			{
 				primero = auxborrarsiguiente;
@@ -588,6 +598,22 @@ public class AgendaDinamica implements IAgenda
 		return resultado;
 	}
 	
+	private boolean existePaciente(ABBTDATurnos arbol, String paciente)
+	{
+		if (!arbol.arbolVacio())
+		{
+			if(arbol.paciente().equals(paciente))
+			{
+				return true;
+			}
+			return this.existePaciente(arbol.hijoDerecho(), paciente) || this.existePaciente(arbol.hijoDerecho(), paciente);
+							
+		}
+		else
+		{
+			return false;
+		}
 		
+	}	
 
 }

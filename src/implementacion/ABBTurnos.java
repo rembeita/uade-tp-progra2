@@ -37,33 +37,29 @@ public class ABBTurnos implements ABBTDATurnos {
 			else if ( turno.compareTo(raiz.turno) == 0)
 				System.out.println("El turno YA esta tomado");
 		}
-
 		
 		public void eliminar(String paciente)
 		{
 			if( raiz != null ) 
 			{
-				if(raiz.paciente == paciente && raiz.hijoI.arbolVacio() && raiz.hijoD.arbolVacio() ) 
+				if(raiz.paciente.equals(paciente) && raiz.hijoI.arbolVacio() && raiz.hijoD.arbolVacio() ) 
 				{
 					raiz = null;
 				}
-				else if(raiz.paciente == paciente && !raiz.hijoI.arbolVacio()) 
+				else if(raiz.paciente.equals(paciente) && !raiz.hijoI.arbolVacio()) 
 				{
 					raiz = this.mayor(raiz.hijoI);
 					raiz.hijoI.eliminar(raiz.paciente);
 				}
-				else if(raiz.paciente == paciente && !raiz.hijoD.arbolVacio())
+				else if(raiz.paciente.equals(paciente) && !raiz.hijoD.arbolVacio())
 				{
 					raiz = this.menor( raiz.hijoD);
 					raiz.hijoD.eliminar(raiz.paciente);
 				}
-				else if(paciente.compareTo(raiz.paciente) < 0 )
-				{
-					raiz.hijoI.eliminar(paciente) ;
-				}
-				else 
+				else
 				{
 					raiz.hijoD.eliminar(paciente) ;
+					raiz.hijoI.eliminar(paciente) ;
 				}
 				
 			}
