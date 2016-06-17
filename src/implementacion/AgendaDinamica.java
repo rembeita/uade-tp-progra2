@@ -272,7 +272,9 @@ public class AgendaDinamica implements IAgenda
 			this.cargaArbolMedico(auxvalor.turnos, resultado, contfilas, auxvalor.fecha);
 			auxvalor = auxvalor.sigFecha;
 		}
-		resultado_final = this.ordenarArrayMedico(resultado);
+	    resultado_final = this.ordenarArrayMedico(resultado);
+		//System.out.println("filas " + resultado_final.length);
+		//System.out.println("cls " + resultado_final[0].length);
 		return resultado_final;
 	}
 
@@ -361,34 +363,53 @@ public class AgendaDinamica implements IAgenda
 	
 	private String[][] ordenarArray(String[][] procesar)
 	{
-		int j;
-		j=filas_mularray(procesar);
-		String[][] auxresultado = new String[j][2];
-		for (int h=0; h < j; h++)
+		int j=0, longitud, i;
+		longitud=filas_mularray(procesar);
+		String[][] auxresultado = new String[0][2];
+		String[][] resultadofinal = new String[longitud][2];
+
+		for (i=0; i < longitud; i++)
 		{
-			for (int i=0; i < j-1; i++)
+			for (j=0; i < longitud-1; j++)
 			{
-				if (procesar[i][1].compareTo(procesar[i+1][1]) > 0 )
+				if (procesar[j][1].compareTo(procesar[j+1][1]) > 0 )
 				{
 					//System.out.println("cambio");
 					//System.out.println("DALEE " + procesar[i][0]);
-					auxresultado[i][0] = procesar[i][0];
-					auxresultado[i][1] = procesar[i][1];
-					procesar[i][0] = procesar[i+1][0];
-					procesar[i][1] = procesar[i+1][1];
-					procesar[i+1][0] = auxresultado[i][0];
-					procesar[i+1][1] = auxresultado[i][1];
+										
+					auxresultado[0][0] = procesar[j+1][0];
+					auxresultado[0][1] = procesar[j+1][1];
+					
+					procesar[j+1][0] = procesar[j][0];
+					procesar[j+1][1] = procesar[j][1];
+					
+					procesar[j][0] = auxresultado[0][0];
+					procesar[j][1] = auxresultado[0][1];
+					
 				}
 			}
 		}
-		return procesar;
+		
+		for (i=0; i < resultadofinal.length; i++)
+		{
+			for (j=0; j < resultadofinal[0].length;j++)
+			{
+				resultadofinal[i][j] = procesar[i][j];
+			}
+		}
+			
+		
+		return resultadofinal;
 	}
 	
 	private String[][] ordenarArrayMedico(String[][] procesar)
 	{
 		int longitud, i, j;
 		longitud=filas_mularray(procesar);
+	//	System.out.println("LONGITUD: " + longitud);
 		String[][] auxresultado = new String[longitud][3];
+		String[][] resultadofinal = new String[longitud][3];
+		
 		for (i=0; i < longitud; i++)
 		{
 			for (j=0; j < longitud-1; j++)
@@ -436,7 +457,16 @@ public class AgendaDinamica implements IAgenda
 			}
 		}
 		
-		return procesar;
+		for (i=0; i < resultadofinal.length; i++)
+		{
+			for (j=0; j < resultadofinal[0].length;j++)
+			{
+				resultadofinal[i][j] = procesar[i][j];
+			}
+		}
+			
+		
+		return resultadofinal;
 	}
 	
 	private String[][] ordenarArrayFecha(String[][] procesar)
@@ -444,7 +474,7 @@ public class AgendaDinamica implements IAgenda
 		int longitud, i, j;
 		longitud=filas_mularray(procesar);
 		String[][] auxresultado = new String[1][4];
-
+		String[][] resultadofinal = new String[longitud][4];
 		for (i=0; i < longitud; i++)
 		{
 			for (j=0; j < longitud-1; j++)
@@ -499,7 +529,17 @@ public class AgendaDinamica implements IAgenda
 			}
 		}
 		
-		return procesar;
+		for (i=0; i < resultadofinal.length; i++)
+		{
+			for (j=0; j < resultadofinal[0].length;j++)
+			{
+				resultadofinal[i][j] = procesar[i][j];
+			}
+		}
+			
+		
+		return resultadofinal;
+		
 	}
 
 	private int filas_mularray(String[][] procesar)

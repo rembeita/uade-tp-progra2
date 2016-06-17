@@ -1,5 +1,7 @@
 package consultorio;
 
+import javax.swing.JOptionPane;
+
 import implementacion.AgendaDinamica;
 import tda.IAgenda;
 import tda.TDACola;
@@ -59,12 +61,13 @@ public class TestAgenda {
 		
 		recorrerAgenda(agenda);
 		
+		System.out.println("\n\n-----------------------------------------------------------\n\n");
 		agenda.eliminarTurno("Evaristo", "20160630", "Eustaquio");
 		recorrerAgenda(agenda);
-		
+		System.out.println("\n\n-----------------------------------------------------------\n\n");
 		agenda.eliminarTurno("Marcela", "20160625", "Carlos");
 		recorrerAgenda(agenda);
-		
+		System.out.println("\n\n-----------------------------------------------------------\n\n");
 		agenda.eliminar("Juan");
 		recorrerAgenda(agenda);
 	}
@@ -97,12 +100,13 @@ public class TestAgenda {
 
 	private static void muestroDatos(String[][] turnos) {
 		// TODO Auto-generated method stub
-		int cols = turnos.length;
-		int rows = turnos[0].length;
+		int rows = turnos.length;
+		int cols = turnos[0].length;
+		//JOptionPane.showMessageDialog(null, "cols " + cols + " rows " + rows);
 		for(int j = 0; j<rows; j++){
 			for(int i = 0; i<cols; i++)
 			{
-				System.out.print(turnos[i][j] + "\t");
+				System.out.print(turnos[j][i] + "\t");
 			}
 			System.out.println("");
 		}
