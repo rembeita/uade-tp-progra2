@@ -33,6 +33,7 @@ public class PruebaNuestra {
 		//agenda.eliminar("Yesica");
 		
 		agenda.eliminarTurno("Yesica-", "20160528", "Josefo33yesi1");
+		
 		/*
 		rtanodoclave = agenda.mostrarMedico("Yesica");
 		
@@ -54,6 +55,7 @@ public class PruebaNuestra {
 			System.out.println("obtenerTurnosMedico en FECHA: " + teststring[i][0] + " " + teststring[i][1] );
 		}
 		*/
+		
 		System.out.println("####################OBTENER TURNOS MEDICO Yesica");
 		String [][] teststring2;
 		teststring2 = agenda.obtenerTurnosMedico("Yesica-");
