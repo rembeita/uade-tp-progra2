@@ -162,6 +162,26 @@ public class AgendaDinamica implements IAgenda
 		}
 		
 		aux.turnos.eliminar(paciente);
+		
+		if (aux.turnos.arbolVacio())
+		{
+			NodoClave auxborrar = primero;
+			NodoClave auxborrarsiguiente = auxborrar.siguiente;
+			System.out.println("ENTREEEEEEEEEEEE");
+			if (auxborrar.clave == medico)
+			{
+				primero = auxborrarsiguiente;
+			}
+			else
+			{
+				while ( auxborrarsiguiente.clave != medico) 
+				{
+					auxborrarsiguiente = auxborrarsiguiente.siguiente;
+					auxborrar = auxborrar.siguiente;
+				}
+					auxborrar.siguiente = auxborrarsiguiente.siguiente;
+			}
+		}
     }
 		
 	public TDAConjunto obtenerMedicos()
