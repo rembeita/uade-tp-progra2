@@ -14,7 +14,7 @@ public class TestAgenda {
 		agenda.agregar("Juan","20160620","Carlos"	,"05:45");
 		agenda.agregar("Juan","20160620","Jose"		,"12:45");
 		agenda.agregar("Juan","20160620","Juan"		,"15:45");
-		agenda.agregar("Juan","20160620","Jeronim"	,"11:45");
+		agenda.agregar("Juan","20160620","Jeronimo"	,"11:45");
 		agenda.agregar("Juan","20160620","Jacinto"	,"10:45");
 		agenda.agregar("Juan","20160620","Joaquin"	,"13:45");
 		agenda.agregar("Juan","20160620","Javier"	,"08:30");
@@ -35,7 +35,7 @@ public class TestAgenda {
 /** Juan */
 		agenda.agregar(	"Marcela","20160620","Jose"		,	"12:45"	);
 		agenda.agregar(	"Marcela","20160620","Marcela"	,	"15:45"	);
-		agenda.agregar(	"Marcela","20160620","Jeronim"	,	"11:45"	);
+		agenda.agregar(	"Marcela","20160620","Jeronimo"	,	"11:45"	);
 		agenda.agregar(	"Marcela","20160620","Jacinto"	,	"10:45"	);
 		agenda.agregar(	"Marcela","20160622","Joaquin"	,	"13:45"	);
 		agenda.agregar(	"Marcela","20160622","Javier"	,	"08:30"	);
@@ -82,8 +82,8 @@ public class TestAgenda {
 		while(!medicos.conjuntoVacio())
 		{	
 			medico = medicos.elegir();
-			System.out.println("\nmedico : " + medico + "\n");
-			System.out.println("paciente turno \t fecha");
+			System.out.println("medico : " + medico);
+			System.out.println(" fecha \t paciente \t turno");
 			String[][] turnos = agenda.obtenerTurnosMedico(medico);
 			muestroDatos(turnos);
 			medicos.sacar(medico);
@@ -92,7 +92,7 @@ public class TestAgenda {
 		/* Recorro la estructura por fechas */	
 		System.out.println("\n\nRecorro la Agenda Por Fecha\n\n");
 		TDACola fechas = agenda.obtenerFechas();
-		System.out.println("paciente turno \t fecha \t\t medico");
+		System.out.println(" fecha \t medico\t paciente \t turno");
 		while(!fechas.colaVacia())
 		{
 			String[][] turnos = agenda.obtenerTurnosFecha(fechas.primero());
@@ -115,3 +115,4 @@ public class TestAgenda {
 	}
 
 }
+

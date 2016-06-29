@@ -489,10 +489,9 @@ public class AgendaDinamica implements IAgenda
 		
 		for (i=0; i < resultadofinal.length; i++)
 		{
-			for (j=0; j < resultadofinal[0].length;j++)
-			{
-				resultadofinal[i][j] = procesar[i][j];
-			}
+				resultadofinal[i][0] = procesar[i][2];
+				resultadofinal[i][1] = procesar[i][0];
+				resultadofinal[i][2] = procesar[i][1];
 		}
 			
 		
@@ -561,10 +560,13 @@ public class AgendaDinamica implements IAgenda
 		
 		for (i=0; i < resultadofinal.length; i++)
 		{
-			for (j=0; j < resultadofinal[0].length;j++)
-			{
-				resultadofinal[i][j] = procesar[i][j];
-			}
+
+				resultadofinal[i][0] = procesar[i][2];
+				resultadofinal[i][1] = procesar[i][3];
+				resultadofinal[i][2] = procesar[i][0];
+				resultadofinal[i][3] = procesar[i][1];
+
+			
 		}
 			
 		
